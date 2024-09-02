@@ -13,8 +13,8 @@ class HandTracker:
         self.hands = self.mpHands.Hands(
             static_image_mode=self.mode,
             max_num_hands=self.maxHands,
-            min_detection_confidence=self.detectionCon,  # Use named parameters
-            min_tracking_confidence=self.trackCon  # Use named parameters
+            min_detection_confidence=self.detectionCon,  
+            min_tracking_confidence=self.trackCon 
         )
         self.mpDraw = mp.solutions.drawing_utils
 
@@ -28,15 +28,18 @@ class HandTracker:
                     self.mpDraw.draw_landmarks(img, handLm, self.mpHands.HAND_CONNECTIONS)
         return img
 
-    def getPostion(self, img, handNo=0, draw=True):
-        lmList = []
-        if self.results.multi_hand_landmarks:
-            myHand = self.results.multi_hand_landmarks[handNo]
-            for id, lm in enumerate(myHand.landmark):
+    def getPostion(self, img, draw=True):
+       lmList = []
+       if self.results.multi_hand_landmarks:
+           for handNo in range(len(self.results.multi_hand_landmarks)):
+              myHand = self.results.multi_hand_landmarks[handNo]
+              handLmList = []
+              for id, lm in enumerate(myHand.landmark):
                 h, w, c = img.shape
                 cx, cy = int(lm.x * w), int(lm.y * h)
-                lmList.append([id, cx, cy])
+                handLmList.append([id, cx, cy])
 
                 if draw:
                     cv2.circle(img, (cx, cy), 5, (255, 0, 255), cv2.FILLED)
-        return lmList
+              lmList.append(handLmList)
+       return lmList
