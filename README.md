@@ -16,6 +16,6 @@ To run this project, you'll need the following Python packages:
 3. Finally, run the virtual_keyboard.py script to start the virtual keyboard.
 
 ## How It Works
-1. The virtual keyboard runs for one hand.
-2. You can move the cursor using one finger.
+1. The virtual keyboard runs for both hands.
+2. You can move the cursor using a finger.
 3. You can click keys on the virtual keyboard by bringing two fingers (thumb and index finger) close together.
